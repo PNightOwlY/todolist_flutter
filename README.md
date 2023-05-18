@@ -17,4 +17,8 @@ git remote add origin https://github.com/PNightOwlY/todolist_flutter.git
 git push -u origin main
 ```
 
-
+## function design
+1. Cat cursor
+2. background (gif)
+3. when you finish todo, there should be some animation
+4. record how long have you spent on the task

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: 'Namer App',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         ),
         home: MyHomePage(),
       ),
@@ -57,6 +57,21 @@ class MyAppState extends ChangeNotifier {
     favorites.remove(pair);
     notifyListeners();
   }
+
+  var todos = <String>[];
+
+  void addTodoList([String? todo]) {
+    if (!todos.contains(todo)) {
+      todos.add(todo!);
+      print(todos);
+    }
+    notifyListeners();
+  }
+
+  void removeTodo(String todo) {
+    todos.remove(todo);
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -79,6 +94,12 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = FavoritesPage();
         break;
+      case 2:
+        page = Placeholder();
+        break;
+      case 3:
+        page = Placeholder();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -86,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The container for the current page, with its background color
     // and subtle switching animation.
     var mainArea = ColoredBox(
-      color: colorScheme.surfaceVariant,
+      color: colorScheme.onInverseSurface,
       child: AnimatedSwitcher(
         duration: Duration(milliseconds: 200),
         child: page,
@@ -110,8 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: 'Home',
                       ),
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Favorites',
+                        icon: Icon(Icons.archive),
+                        label: 'Archive',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.music_note),
+                        label: 'Music',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.card_giftcard),
+                        label: 'Gift',
                       ),
                     ],
                     currentIndex: selectedIndex,
@@ -136,8 +165,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: Text('Home'),
                       ),
                       NavigationRailDestination(
-                        icon: Icon(Icons.favorite),
-                        label: Text('Favorites'),
+                        icon: Icon(Icons.archive),
+                        label: Text('Archive'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.music_note),
+                        label: Text('Music'),
+                      ),
+                      NavigationRailDestination(
+                        icon: Icon(Icons.card_giftcard),
+                        label: Text('Gift'),
                       ),
                     ],
                     selectedIndex: selectedIndex,
@@ -162,45 +199,56 @@ class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var pair = appState.current;
 
     IconData icon;
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
+
+    var theme = Theme.of(context);
 
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SearchBar(
+            hintText: "Search",
+            onChanged: (value) => print(value),
+          ),
+          SizedBox(height: 10),
+
+          /// 输入框来源 https://flutter.cn/docs/cookbook/forms/text-input
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Enter a search term',
+            ),
+            onSubmitted: (value) {
+              appState.addTodoList(value);
+            },
+          ),
           Expanded(
-            flex: 3,
-            child: HistoryListView(),
+            // Make better use of wide windows with a grid.
+            child: GridView(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 400,
+                childAspectRatio: 400 / 80,
+              ),
+              children: [
+                for (var todo in appState.todos)
+                  ListTile(
+                    leading: IconButton(
+                      icon: Icon(Icons.delete_outline, semanticLabel: 'Delete'),
+                      color: theme.colorScheme.primary,
+                      onPressed: () {
+                        appState.removeTodo(todo);
+                      },
+                    ),
+                    title: Text(
+                      todo,
+                    ),
+                  ),
+              ],
+            ),
           ),
           SizedBox(height: 10),
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
-            ],
-          ),
           Spacer(flex: 2),
         ],
       ),
