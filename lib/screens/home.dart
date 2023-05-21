@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../model/todo.dart';
 import '../widgets/todo_item.dart';
+import 'package:just_audio/just_audio.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,12 +14,27 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todoList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
+  late AudioPlayer _audioPlayer;
   final _todoController = TextEditingController();
 
   @override
   void initState() {
     _foundToDo = todoList;
+    // _audioPlayer = AudioPlayer()..setAsset('assets/music/good.mp3');
+    initPlayer();
     super.initState();
+  }
+
+  void initPlayer() async {
+    _audioPlayer = AudioPlayer();
+    _audioPlayer.setUrl(
+        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3");
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
@@ -125,14 +141,25 @@ class _HomeState extends State<Home> {
   void _handleToDoChange(ToDo todo) {
     setState(() {
       todo.isDone = !todo.isDone;
-      _sortFoundToDO();
+      if (todo.isDone == true) {
+        _playMusic();
+      }
+      _sortFoundToDo();
     });
   }
 
-  void _sortFoundToDO() {
+  void _playMusic() {
+    // todo add
+    print("play music");
+    _audioPlayer.play();
+  }
+
+  void _sortFoundToDo() {
     _foundToDo.sort((a, b) {
-      if ((b.isDone == a.isDone)) {
+      if ((b.isDone && a.isDone)) {
         return b.id.compareTo(a.id);
+      } else if ((b.isDone == false && a.isDone == false)) {
+        return a.id.compareTo(b.id);
       } else if (b.isDone) {
         return 1;
       }
@@ -153,7 +180,7 @@ class _HomeState extends State<Home> {
             id: DateTime.now().millisecondsSinceEpoch.toString(),
             todoText: toDo),
       );
-      _sortFoundToDO();
+      _sortFoundToDo();
       _todoController.clear();
     });
   }
@@ -171,7 +198,7 @@ class _HomeState extends State<Home> {
     }
 
     setState(() {
-      _sortFoundToDO();
+      _sortFoundToDo();
       _foundToDo = result;
     });
   }

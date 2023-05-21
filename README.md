@@ -32,7 +32,28 @@ git push -u origin main
 - [ ] Testing
 - [ ] Connect mysql for data storage
 
+## Add Flutter Audioplayer
+[Official Link](https://pub.dev/packages/audioplayers/install)
+### Run this command
+With Flutter:
+```
+$ flutter pub add audioplayers
+```
+This will add a line like this to your package's pubspec.yaml (and run an implicit flutter pub get):
+```
+dependencies:
+  audioplayers: ^4.0.1
+```
+### Import it
+Now in your Dart code, you can use:
+```
+import 'package:audioplayers/audioplayers.dart'
+```
+
 
 ## Reference
 [Tutorial video](https://www.youtube.com/watch?v=K4P5DZ9TRns&t=319s)
 [Introduction of text field](https://zhuanlan.zhihu.com/p/222993875)
+[Github Reference](https://github.com/itzpradip/flutter-todo-app/tree/master)
+[Music library](https://freesfx.co.uk/Category/Cats/124)
+[Flutter music library](https://pub.dev/packages/audioplayers/install)
