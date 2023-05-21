@@ -45,6 +45,8 @@ dependencies:
   audioplayers: ^4.0.1
 ```
 ### Import it
+just_audio  
+https://suragch.medium.com/playing-short-audio-clips-in-flutter-with-just-audio-3c80eb7eb6ea
 Now in your Dart code, you can use:
 ```
 import 'package:audioplayers/audioplayers.dart'

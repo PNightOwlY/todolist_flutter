@@ -17,14 +17,6 @@ packages:
       url: "https://mirror.sjtu.edu.cn/dart-pub/"
     source: hosted
     version: "0.1.14"
-  audio_video_progress_bar:
-    dependency: "direct main"
-    description:
-      name: audio_video_progress_bar
-      sha256: "4bc6ab03fb9599d36443e9837615d778c820afe52379ab62dfacae618f62e96c"
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "0.9.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -65,14 +57,6 @@ packages:
       url: "https://mirror.sjtu.edu.cn/dart-pub/"
     source: hosted
     version: "3.0.3"
-  english_words:
-    dependency: "direct main"
-    description:
-      name: english_words
-      sha256: "6a7ef6473a97bd8571b6b641d006a6e58a7c67e65fb6f3d6d1151cb46b0e983c"
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "4.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -102,14 +86,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      sha256: aeb0b80a8b3709709c9cc496cdc027c5b3216796bc0af0ce1007eaf24464fd4c
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "2.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -152,14 +128,6 @@ packages:
       url: "https://mirror.sjtu.edu.cn/dart-pub/"
     source: hosted
     version: "0.4.8"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "6b0206b0bf4f04961fc5438198ccb3a885685cd67d4d4a32cc20ad7f8adbe015"
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "2.1.0"
   matcher:
     dependency: transitive
     description:
@@ -184,14 +152,6 @@ packages:
       url: "https://mirror.sjtu.edu.cn/dart-pub/"
     source: hosted
     version: "1.9.1"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -272,14 +232,6 @@ packages:
       url: "https://mirror.sjtu.edu.cn/dart-pub/"
     source: hosted
     version: "4.2.4"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
-      url: "https://mirror.sjtu.edu.cn/dart-pub/"
-    source: hosted
-    version: "6.0.5"
   rxdart:
     dependency: transitive
     description:
@@ -382,5 +334,5 @@ packages:
     source: hosted
     version: "1.0.0"
 sdks:
-  dart: ">=3.0.0-417 <4.0.0"
+  dart: ">=3.0.0-0 <4.0.0"
   flutter: ">=3.3.0"
