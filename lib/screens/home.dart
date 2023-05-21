@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../model/todo.dart';
 import '../widgets/todo_item.dart';
+import '../model/player.dart';
 import 'package:just_audio/just_audio.dart';
 
 class Home extends StatefulWidget {
@@ -14,21 +15,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final todoList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
-  late AudioPlayer _audioPlayer;
+  Audio _audioPlayer = Audio();
   final _todoController = TextEditingController();
 
   @override
   void initState() {
     _foundToDo = todoList;
-    // _audioPlayer = AudioPlayer()..setAsset('assets/music/good.mp3');
-    initPlayer();
     super.initState();
-  }
-
-  void initPlayer() async {
-    _audioPlayer = AudioPlayer();
-    _audioPlayer.setUrl(
-        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3");
   }
 
   @override
@@ -45,7 +38,7 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(children: [
               searchBox(),
               Expanded(
@@ -142,16 +135,10 @@ class _HomeState extends State<Home> {
     setState(() {
       todo.isDone = !todo.isDone;
       if (todo.isDone == true) {
-        _playMusic();
+        _audioPlayer.play();
       }
       _sortFoundToDo();
     });
-  }
-
-  void _playMusic() {
-    // todo add
-    print("play music");
-    _audioPlayer.play();
   }
 
   void _sortFoundToDo() {
@@ -242,14 +229,42 @@ AppBar _buildAppBar() {
           color: tdBlack,
           size: 30,
         ),
-        SizedBox(
+        PhotoBox()
+      ],
+    ),
+  );
+}
+
+class PhotoBox extends StatefulWidget {
+  const PhotoBox({
+    super.key,
+  });
+
+  @override
+  State<PhotoBox> createState() => PhotoBoxState();
+}
+
+class PhotoBoxState extends State<PhotoBox> {
+  late Audio _audioPlayer;
+
+  @override
+  void initState() {
+    _audioPlayer = Audio();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () {
+          _audioPlayer.play();
+        },
+        child: SizedBox(
             width: 50,
             height: 50,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.asset("assets/images/nana3.png"),
-            ))
-      ],
-    ),
-  );
+            )));
+  }
 }

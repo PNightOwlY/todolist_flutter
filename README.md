@@ -57,3 +57,4 @@ import 'package:audioplayers/audioplayers.dart'
 [Github Reference](https://github.com/itzpradip/flutter-todo-app/tree/master)
 [Music library](https://freesfx.co.uk/Category/Cats/124)
 [Flutter music library](https://pub.dev/packages/audioplayers/install)
+[Turn all widgets be tappable.](https://stackoverflow.com/questions/49067624/how-can-i-implement-onpressed-callback-for-text-widget-flutter)
