@@ -22,3 +22,12 @@ git push -u origin main
 2. background (gif)
 3. when you finish todo, there should be some animation
 4. record how long have you spent on the task
+
+
+## progress
+- [x] git this project 5/18
+- [x] draw UI 5/18
+- [x] finish the front-end UI 5/20
+- [x] finish the back-end functions 5/21
+- [ ] testing
+- [ ] connect mysql for data storage
