@@ -14,8 +14,9 @@ dependencies:
 
   english_words: ^4.0.0
   provider: ^6.0.0
-  
-  just_audio: ^0.9.33
+
+  just_audio: ^0.9.15
+  audio_video_progress_bar: ^0.9.0
 
 
 dev_dependencies:
