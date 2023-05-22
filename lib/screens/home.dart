@@ -3,7 +3,6 @@ import '../constants/colors.dart';
 import '../model/todo.dart';
 import '../widgets/todo_item.dart';
 import '../model/player.dart';
-import 'package:just_audio/just_audio.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
