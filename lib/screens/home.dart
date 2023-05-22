@@ -38,6 +38,10 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/bg.png"),
+                    fit: BoxFit.cover)),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(children: [
               searchBox(),
