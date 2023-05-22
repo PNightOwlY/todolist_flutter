@@ -1,8 +1,10 @@
+import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../model/todo.dart';
 import '../widgets/todo_item.dart';
 import '../model/player.dart';
+import 'package:toast/toast.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,6 +33,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
       backgroundColor: tdBGColor,
       appBar: _buildAppBar(),
@@ -134,6 +137,10 @@ class _HomeState extends State<Home> {
     );
   }
 
+  showToast(String tip) {
+    Toast.show(tip, duration: Toast.lengthShort, gravity: Toast.center);
+  }
+
   void _handleToDoChange(ToDo todo) {
     setState(() {
       todo.isDone = !todo.isDone;
@@ -142,6 +149,18 @@ class _HomeState extends State<Home> {
       }
       _sortFoundToDo();
     });
+    var allDone = true;
+    for (ToDo t in todoList) {
+      if (t.isDone == false) {
+        allDone = false;
+        break;
+      }
+    }
+    print(allDone);
+    if (allDone) {
+      print("object");
+      showToast("congraduations! you finished all todos");
+    }
   }
 
   void _sortFoundToDo() {
@@ -164,15 +183,19 @@ class _HomeState extends State<Home> {
   }
 
   void _addToDoItem(String toDo) {
-    setState(() {
-      todoList.add(
-        ToDo(
-            id: DateTime.now().millisecondsSinceEpoch.toString(),
-            todoText: toDo),
-      );
-      _sortFoundToDo();
-      _todoController.clear();
-    });
+    if (toDo.isEmpty) {
+      showToast("~ sorry, cannot add empty item");
+    } else {
+      setState(() {
+        todoList.add(
+          ToDo(
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
+              todoText: toDo),
+        );
+        _sortFoundToDo();
+        _todoController.clear();
+      });
+    }
   }
 
   void _runFilter(String enteredKeyword) {
