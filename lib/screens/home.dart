@@ -1,4 +1,3 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../model/todo.dart';
@@ -146,6 +145,10 @@ class _HomeState extends State<Home> {
       todo.isDone = !todo.isDone;
       if (todo.isDone == true) {
         _audioPlayer.play();
+        var spendTime =
+            -(int.parse(todo.id) - DateTime.now().millisecondsSinceEpoch) /
+                1000;
+        showToast("you have spend $spendTime s");
       }
       _sortFoundToDo();
     });
