@@ -6,6 +6,10 @@ import '../widgets/todo_item.dart';
 import '../model/player.dart';
 import 'package:toast/toast.dart';
 
+showToast(String tip) {
+  Toast.show(tip, duration: Toast.lengthShort, gravity: Toast.center);
+}
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -137,10 +141,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  showToast(String tip) {
-    Toast.show(tip, duration: Toast.lengthShort, gravity: Toast.center);
-  }
-
   void _handleToDoChange(ToDo todo) {
     setState(() {
       todo.isDone = !todo.isDone;
@@ -249,16 +249,30 @@ AppBar _buildAppBar() {
     elevation: 0,
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Icon(
-          Icons.menu,
-          color: tdBlack,
-          size: 30,
-        ),
-        PhotoBox()
-      ],
+      children: [Menu(), PhotoBox()],
     ),
   );
+}
+
+class Menu extends StatelessWidget {
+  const Menu({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    ToastContext().init(context);
+    return InkWell(
+      onTap: () {
+        showToast("you taped the menu");
+      },
+      child: Icon(
+        Icons.menu,
+        color: tdBlack,
+        size: 30,
+      ),
+    );
+  }
 }
 
 class PhotoBox extends StatefulWidget {
