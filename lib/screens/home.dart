@@ -148,7 +148,7 @@ class _HomeState extends State<Home> {
         var spendTime =
             -(int.parse(todo.id) - DateTime.now().millisecondsSinceEpoch) /
                 1000;
-        showToast("you have spend $spendTime s");
+        showToast("you have spent $spendTime s");
       }
       _sortFoundToDo();
     });
